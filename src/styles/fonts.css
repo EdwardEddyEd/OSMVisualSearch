@@ -1,0 +1,218 @@
+/* Inter */
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-Thin.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-ExtraLight.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-Light.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-Regular.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-Medium.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-SemiBold.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-Bold.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-ExtraBold.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url(/assets/fonts/Inter/Inter-Black.ttf) format("trueType");
+}
+
+/* Barlow */
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-Thin.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 200;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-ExtraLight.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-Light.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-Regular.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-Medium.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-SemiBold.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-Bold.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: normal;
+    font-weight: 800;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-ExtraBold.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Outfit";
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: url(/assets/fonts/Outfit/Outfit-Black.ttf) format("trueType");
+}
+
+/* Barlow - Italics */
+@font-face {
+    font-family: "Barlow";
+    font-style: italic;
+    font-weight: 100;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-ThinItalic.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: italic;
+    font-weight: 200;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-ExtraLightItalic.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-LightItalic.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-RegularItalic.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-MediumItalic.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-SemiBoldItalic.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-BoldItalic.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Barlow";
+    font-style: italic;
+    font-weight: 800;
+    font-display: swap;
+    src: url(/assets/fonts/Barlow/Barlow-ExtraBoldItalic.ttf) format("trueType");
+}
+
+@font-face {
+    font-family: "Outfit";
+    font-style: italic;
+    font-weight: 900;
+    font-display: swap;
+    src: url(/assets/fonts/Outfit/Outfit-BlackItalic.ttf) format("trueType");
+}

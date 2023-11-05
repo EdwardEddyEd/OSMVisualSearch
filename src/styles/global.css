@@ -1,0 +1,66 @@
+/* ========== import font source ========== */
+@import "fonts.css";
+
+/* ========== import custom styles ========== */
+@import "custom-styles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== tailwind custom styles ========== */
+@layer components {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      scroll-padding-top: 8rem;
+    }
+  }
+
+  body {
+    @apply bg-light text-dark;
+  }
+
+  .container {
+    @apply max-w-[1140px] mx-auto px-8 sm:px-8;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-barlow;
+  }
+
+  h1 {
+    @apply text-5xl sm:text-8xl font-semibold;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold;
+  }
+
+  h3 {
+    @apply text-xl tracking-widest;
+  }
+
+  nav ul li {
+    @apply opacity-60 font-semibold hover:opacity-100 transition-opacity duration-150;
+  }
+
+  p,
+  li,
+  a {
+    @apply font-inter;
+  }
+
+  .footer-icons {
+    @apply flex justify-center items-center text-light border border-light p-4 rounded-lg;
+  }
+}

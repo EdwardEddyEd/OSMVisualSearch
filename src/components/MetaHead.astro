@@ -1,0 +1,86 @@
+---
+import { type IMetaHead } from "@types";
+import { info } from "@data";
+
+const { title, description, ogImageUrl } = Astro.props as IMetaHead;
+---
+
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="theme-color" content="#181621" />
+
+<!-- Unused favicon settings -->
+<!-- <link rel="icon" type="image/x-icon" href="/favicon.ico" />  Preferred by Chrome over svg -->
+<!-- <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />  A way for Safari on iOS to represent website on the homescreen -->
+<!-- <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" /> -->
+<!-- <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" /> -->
+<!-- <link rel="manifest" href="/site.webmanifest" />  A JSON file that describes how a site should behave when installed on the user's desktop or phone. -->
+<!-- <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />  An svg file to color the svg favicon. This svg should be all black as it's a mask -->
+<!-- <meta name="msapplication-TileColor" content="#da532c" />  The tile color of a saved website/app on Windows 8 UI from IE -->
+
+<link rel="manifest" href="/app.webmanifest">
+<meta name="generator" content={Astro.generator} />
+
+<!-- Primary Meta Tags -->
+{
+    title && (
+        <link rel="canonical" href={`${info.baseUrl}${Astro.url.pathname}`} />
+    )
+}
+{title && <title>{`${title}`}</title>}
+{title && <meta name="title" content={`${title}`} />}
+{description && <meta name="description" content={description} />}
+
+<!-- Open Graph / Facebook -->
+{title && <meta property="og:type" content="website" />}
+{
+    title && (
+        <meta
+            property="og:url"
+            content={`${info.baseUrl}${Astro.url.pathname}`}
+        />
+    )
+}
+{title && <meta property="og:title" content={`${title}`} />}
+{description && <meta property="og:description" content={description} />}
+{
+    ogImageUrl && (
+        <meta property="og:image" content={`${info.baseUrl}${ogImageUrl}`} />
+    )
+}
+
+<!-- Twitter -->
+{title && <meta property="twitter:card" content="summary_large_image" />}
+{
+  title && (
+    <meta
+      property="twitter:url"
+      content={`${info.baseUrl}${Astro.url.pathname}`}
+    />
+  )
+}
+{title && <meta property="twitter:title" content={`${title}`} />}
+{description && <meta property="twitter:description" content={description} />}
+{
+  ogImageUrl && (
+    <meta property="twitter:image" content={`${info.baseUrl}${ogImageUrl}`} />
+  )
+}
+
+<!-- preload assests -->
+<link
+  rel="preload"
+  href="/assets/fonts/Inter/Inter-Light.ttf"
+  as="font"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/assets/fonts/Barlow/Barlow-SemiBold.ttf"
+  as="font"
+  crossorigin
+/>

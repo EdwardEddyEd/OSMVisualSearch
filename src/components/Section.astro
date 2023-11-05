@@ -1,0 +1,9 @@
+---
+import { type ISectionProps } from "@types";
+
+const { title } = Astro.props as ISectionProps;
+---
+
+<section id={title} class="flex">
+    <slot />
+</section>
