@@ -2,9 +2,123 @@
 
 ---
 
-
-<section id="pixi-root" class="flex">
-    <div class="">
-
+<section class="flex flex-col items-center">
+    <div id="drop-area" class="flex border w-full aspect-video mt-10">
+        <div id="pixi-root" class="flex w-full aspect-video"></div>
     </div>
+    <!-- <div
+        id="drop-area"
+        class="border border-dashed border-slate-400 w-1/2 rounded-lg mt-10 p-4"
+    >
+        <form class="my-form flex flex-col">
+            <p>
+                Upload xml file with file dialog or by dragging and
+                dropping them onto the dashed region
+            </p>
+            <input
+                class="self-center mt-5"
+                type="file"
+                id="file-input"
+                accept=".xml,.osm"
+            />
+        </form>
+    </div> -->
 </section>
+
+<script>
+    import { Application } from "pixi.js";
+    import { goFullScreen } from "src/utils/fullScreen";
+    import { PIXIMapGraph, generatePIXIGraph } from "@components/MapGraph";
+    import type { MapBounds } from "@components/MapGraph/MapBounds";
+
+    // Create PIXI Root App View and add it to target element
+    let appContainer = document.getElementById("pixi-root")!;
+    var app = new Application({ antialias: true, resizeTo: appContainer });
+    appContainer!.appendChild(app.view as any);
+    app.stage.sortableChildren = true;
+
+    var mapBounds: MapBounds | null = null;
+    var PIXIGraph: PIXIMapGraph | null = null;
+
+    // Callback to get the values
+    const dataCB = (
+        returnMapBounds: MapBounds,
+        returnPIXIGraph: PIXIMapGraph,
+    ) => {
+        mapBounds = returnMapBounds;
+        PIXIGraph = returnPIXIGraph;
+    };
+
+    new ResizeObserver(() => {
+        if (PIXIGraph && mapBounds) {
+            PIXIGraph.normalizeGraphPositions(
+                mapBounds,
+                appContainer.clientWidth,
+                appContainer.clientHeight,
+            );
+        }
+    }).observe(appContainer);
+
+    let dropArea: HTMLElement | null = document.getElementById("drop-area")!;
+    if (dropArea === null) throw new Error("Drop Area Element was null");
+
+    // Event Listener for Drop Area
+    ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        dropArea!.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e: Event) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ["dragenter", "dragover"].forEach((eventName) => {
+        dropArea!.addEventListener(eventName, highlight, false);
+    });
+    ["dragleave", "drop"].forEach((eventName) => {
+        dropArea!.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight(e: Event) {
+        dropArea!.classList.add("border-amber-400");
+    }
+
+    function unhighlight(e: Event) {
+        dropArea!.classList.remove("border-amber-400");
+    }
+
+    dropArea.addEventListener("drop", handleDrop, false);
+
+    function handleDrop(e: DragEvent) {
+        const dt = e.dataTransfer!;
+        const file = dt.files[0];
+        if (PIXIGraph !== null) {
+            PIXIGraph.destroy();
+        }
+        generatePIXIGraph(app, file, dataCB);
+    }
+
+    // Event Listener for File Input
+    // let inputElement: HTMLElement | null =
+    //     document.getElementById("file-input")!;
+    // if (inputElement === null) throw new Error("File Input Element was null");
+
+    // inputElement.addEventListener("change", handleFiles, false);
+    // function handleFiles(this: HTMLElement, e: Event) {
+    //     const target = e.target as HTMLInputElement;
+    //     const file = target.files![0];
+    //     if (PIXIGraph !== null) PIXIGraph.destroy();
+    //     generatePIXIGraph(app, file, dataCB);
+    // }
+
+    // Fullscreen listener
+    document.addEventListener(
+        "keydown",
+        (e) => {
+            if (e.key === "Enter") {
+                goFullScreen("pixi-root");
+            }
+        },
+        false,
+    );
+</script>

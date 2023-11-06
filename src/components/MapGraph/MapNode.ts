@@ -15,6 +15,11 @@ export default class MapNode{
         this.isVertex = isVertex;
     }
 
+    setPos(xpos: number, ypos: number){
+        this.xpos = xpos;
+        this.ypos = ypos;
+    }
+
     setIsVertex(isVertex: boolean){
         this.isVertex = isVertex;
     }

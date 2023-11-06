@@ -1,11 +1,13 @@
 import MapNode from "./MapNode";
-import MapVertex from "./MapVertex";
-import MapEdge from "./MapEdge";
-import MapGraph from "./MapGraph";
+import { PIXIMapVertex } from "./MapVertex";
+import { PIXIMapEdge } from "./MapEdge";
+import { PIXIMapGraph } from "./MapGraph";
+import generatePIXIGraph from "./generateGraphFromFile";
 
 export {
     MapNode,
-    MapVertex,
-    MapEdge,
-    MapGraph
+    PIXIMapVertex,
+    PIXIMapEdge,
+    PIXIMapGraph,
+    generatePIXIGraph
 }

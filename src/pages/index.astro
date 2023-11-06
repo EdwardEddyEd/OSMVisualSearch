@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import MetaHead from "@components/MetaHead.astro";
-import CanvasTest from "@components/CanvasTest.astro";
+import PIXIRoot from "@components/PIXIJs/PIXIRoot.astro";
 ---
 
 <!doctype html>
@@ -12,9 +12,10 @@ import CanvasTest from "@components/CanvasTest.astro";
 
     <body>
         <Layout>
+            <PIXIRoot/>
            
         </Layout>
 
-        <CanvasTest/>
+        <!-- <CanvasTest/> -->
     </body>
 </html>

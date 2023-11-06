@@ -1,0 +1,34 @@
+---
+
+---
+
+<div id="drop-area" class="border border-dashed border-slate-400 w-80 hover:border-amber-300">
+    <form class="my-form">
+        <p>
+            Upload multiple files with the file dialog or by dragging and
+            dropping images onto the dashed region
+        </p>
+        <input
+            type="file"
+            id="file-input"
+            accept=".xml,.osm"
+        />
+        <label class="button" for="file-input">Select some files</label>
+    </form>
+</div>
+
+<script>
+    let dropArea: HTMLElement | null = document.getElementById("drop-area");
+    if (dropArea === null) throw new Error("Drop Area Element was null");
+
+    let inputElement: HTMLElement | null = document.getElementById("file-input")!;
+    if (inputElement === null) throw new Error("File Input Element was null");
+
+    inputElement.addEventListener("change", handleFiles, false);
+    function handleFiles(this: HTMLElement, ev: Event) {
+        const target = ev.target as HTMLInputElement;
+        const files = target.files!;
+        let reader = new FileReader();
+        reader.readAsText(files[0]);
+    }
+</script>
