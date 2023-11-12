@@ -1,15 +1,18 @@
 import type { Application, ICanvas } from "pixi.js";
-import type { MapBounds } from "./MapBounds";
+
+import MapNode from "./MapNode"
 import { PIXIMapGraph } from "./MapGraph";
-import MapNode from "./MapNode";
 import { PIXIMapVertex } from "./MapVertex";
 import { PIXIMapEdge } from "./MapEdge";
+import type { MapBounds } from "./MapBounds";
+
+import { PIXIGraphStore, mapBoundsStore } from "src/ts/store";
 
 const XML_WAY_VALUES = [
     "bus_stop",
     "crossing",
     // "cycleway",
-    // "footway",
+    "footway",
     "give_way",
     "living_street",
     "motorway",
@@ -35,7 +38,7 @@ const XML_WAY_VALUES = [
     "unclassified",
 ];
 
-const generatePIXIGraph = (app: Application<ICanvas>, file: File, cb: (bounds: MapBounds, PIXIGraph: PIXIMapGraph) => void) => {
+const generatePIXIGraph = (app: Application<ICanvas>, file: File) => {
     const reader = new FileReader();
     reader.readAsText(file);
 
@@ -143,7 +146,7 @@ const generatePIXIGraph = (app: Application<ICanvas>, file: File, cb: (bounds: M
             return existingVertex;
         };
         const addEdge = (app: Application<ICanvas>, mapBounds: MapBounds, PIXIGraph: PIXIMapGraph, edge: MapNode[], startVertex: PIXIMapVertex, endVertex: PIXIMapVertex) => {
-            const PIXIEdge = new PIXIMapEdge(app, mapBounds, edge, "#ff0000");
+            const PIXIEdge = new PIXIMapEdge(app, mapBounds, edge);
             PIXIGraph.addEdge(startVertex, endVertex, PIXIEdge);
         }
 
@@ -192,8 +195,11 @@ const generatePIXIGraph = (app: Application<ICanvas>, file: File, cb: (bounds: M
             });
         });
 
-        // Return values via callback
-        cb(mapBounds, PIXIGraph);
+        // Store the PIXIGraph and MapBounds
+        PIXIGraphStore.set(PIXIGraph);
+        mapBoundsStore.set(mapBounds);
+
+        console.log(PIXIGraphStore.get());
     }
 }
 export default generatePIXIGraph;
