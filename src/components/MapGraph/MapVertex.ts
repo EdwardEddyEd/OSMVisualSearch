@@ -1,4 +1,11 @@
-import { Graphics, type Graphics as GraphicsType, type Application, type ICanvas } from "pixi.js";
+import { 
+    Circle,
+    Sprite, 
+    Graphics, 
+    type Sprite as SpriteType, 
+    type Application, 
+    type ICanvas, 
+} from "pixi.js";
 import type { MapBounds } from "./MapBounds";
 import type MapNode from "./MapNode";
 
@@ -7,23 +14,45 @@ export class PIXIMapVertex {
     mapBounds: MapBounds;
     mapVertex: MapNode;
 
-    PIXIGraphic: GraphicsType;
+    sprite: SpriteType;
     color: string;
     alpha: number;
     radius: number;
+    scale: number;
     zIndex: number;
 
     constructor(app: Application<ICanvas>, mapBounds: MapBounds, mapVertex: MapNode, color?: string, alpha?: number, radius?: number, zIndex?: number) {
         this.app = app;
         this.mapBounds = mapBounds;
         this.mapVertex = mapVertex;
-        this.color = color ?? "#00ffaa";
-        this.alpha = alpha ?? 1;
-        this.radius = radius ?? 2;
+        this.color = color ?? "#ffdd00";
+        this.alpha = alpha ?? 0.5;
+        this.radius = radius ?? 3.5;
+        this.scale = 1;
         this.zIndex = 5;
 
-        this.PIXIGraphic = new Graphics();
-        this.app.stage.addChild(this.PIXIGraphic);
+        this.sprite = new Sprite();
+        this.sprite.eventMode = "dynamic";   // Similar to interactive = true
+        this.sprite.anchor.set(0.5, 0.5);
+        this.app.stage.addChild(this.sprite);
+        
+        // Adding interactivity
+        const onPointerOver = () => {
+            this.setColorAlpha(undefined, 1);
+            this.setScale(1.5);
+            // this.app.renderer.render(this.sprite);
+            console.log("Pointer Over");
+        };
+        const onPointerOut = () => {
+            this.setColorAlpha(undefined, 0.5);
+            this.setScale(1);
+
+            // this.app.renderer.render(this.sprite);
+            console.log("Pointer Out");
+        };
+        this.sprite.on("pointerover", onPointerOver);
+        this.sprite.on("pointerout", onPointerOut);
+        this.sprite.cursor = 'pointer';
         
         this.normalizePosition(mapBounds);
     }
@@ -31,16 +60,33 @@ export class PIXIMapVertex {
     setColorAlpha(color?: string, alpha?: number) {
         this.color = color ?? this.color;
         this.alpha = alpha ?? this.alpha;
-        this.createGraphic();
+        this.generateSprite();
     }
 
-    createGraphic() {
-        this.PIXIGraphic.clear();
-        this.PIXIGraphic.zIndex = this.zIndex;
-        this.PIXIGraphic.lineStyle(0);
-        this.PIXIGraphic.beginFill(this.color, this.alpha);
-        this.PIXIGraphic.drawCircle(this.mapVertex.xpos, this.mapVertex.ypos, this.radius);
-        this.PIXIGraphic.endFill();
+    setScale(scale: number) {
+        this.scale = scale;
+        this.generateSprite();
+    }
+
+    generateSprite() {
+        const PIXIGraphic = new Graphics();
+        PIXIGraphic.clear();
+        PIXIGraphic.lineStyle(0);
+        PIXIGraphic.beginFill(this.color, this.alpha);
+        PIXIGraphic.drawCircle(this.mapVertex.xpos, this.mapVertex.ypos, this.radius * this.scale);
+        PIXIGraphic.endFill();
+        
+        const texture = this.app.renderer.generateTexture(PIXIGraphic);
+        this.sprite.texture = texture;
+        this.sprite.x = this.mapVertex.xpos;
+        this.sprite.y = this.mapVertex.ypos;
+        this.sprite.zIndex = this.zIndex;
+        PIXIGraphic.destroy();
+    }
+
+    setHitArea() {
+        const hitArea = new Circle(0, 0, this.radius * 3);
+        this.sprite.hitArea = hitArea;
     }
 
     normalizePosition(mapBounds: MapBounds, canvasWidth?: number, canvasHeight?: number) {
@@ -53,11 +99,12 @@ export class PIXIMapVertex {
         const ypos = height - (height * ((node.lat - this.mapBounds.minlat) / (this.mapBounds.maxlat - this.mapBounds.minlat)));
         node.setPos(xpos, ypos);
 
-        this.createGraphic();
+        this.generateSprite();
+        this.setHitArea();
     }
 
     destroy() {
-        this.app.stage.removeChild(this.PIXIGraphic);
-        this.PIXIGraphic.destroy();
+        this.app.stage.removeChild(this.sprite);
+        this.sprite.destroy();
     }
 }

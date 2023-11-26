@@ -17,8 +17,8 @@ export class PIXIMapEdge{
         this.app = app;
         this.mapBounds = mapBounds;
         this.mapEdge = mapEdge;
-        this.color = color ?? "#ff0000";
-        this.alpha = alpha ?? 1;
+        this.color = color ?? "#ff4400";
+        this.alpha = alpha ?? .3;
         this.width = width ?? 3;
         this.zIndex = zIndex ?? 0;
      

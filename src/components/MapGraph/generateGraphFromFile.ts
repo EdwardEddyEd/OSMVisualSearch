@@ -12,7 +12,7 @@ const XML_WAY_VALUES = [
     "bus_stop",
     "crossing",
     // "cycleway",
-    "footway",
+    // "footway",
     "give_way",
     "living_street",
     "motorway",
